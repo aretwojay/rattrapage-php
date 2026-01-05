@@ -41,7 +41,12 @@ class DataProcessor
 
     private function saveToJson(array $data): void
     {
-        file_put_contents(__DIR__ . '/../sortedInput.json', json_encode($data, JSON_PRETTY_PRINT));
+        $filePath = __DIR__ . '/../sortedInput.json';
+        $result = file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT));
+
+        if ($result === false) {
+            throw new \RuntimeException('Failed to write JSON data to file: ' . $filePath);
+        }
     }
 
     private function calculateSimilarityScore(array $leftList, array $rightList): int
