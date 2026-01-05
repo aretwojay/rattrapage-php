@@ -19,11 +19,16 @@ class DataProcessor
         $left = [];
         $right = [];
 
-        foreach($input as $row) {
-            if (isset($row[0])) {
-                $left[] = $row[0];
+        foreach ($input as $row) {
+            $hasLeft = is_array($row) && array_key_exists(0, $row);
+            $hasRight = is_array($row) && array_key_exists(1, $row);
+
+            if ($hasLeft xor $hasRight) {
+                throw new \InvalidArgumentException('Each row must contain both columns at index 0 and 1, or neither.');
             }
-            if (isset($row[1])) {
+
+            if ($hasLeft && $hasRight) {
+                $left[] = $row[0];
                 $right[] = $row[1];
             }
         }
