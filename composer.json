@@ -1,0 +1,11 @@
+{
+  "name": "ruben/rattrapage",
+  "description": "Control 2 - Refactoring to OOP",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {}
+}
