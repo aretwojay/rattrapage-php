@@ -4,6 +4,13 @@ namespace App;
 
 class DataProcessor
 {
+    private string $outputFilePath;
+
+    public function __construct(string $outputFilePath = null)
+    {
+        $this->outputFilePath = $outputFilePath ?? __DIR__ . '/../sortedInput.json';
+    }
+
     public function process(array $input): int
     {
         $columns = $this->extractColumns($input);
@@ -41,7 +48,7 @@ class DataProcessor
 
     private function saveToJson(array $data): void
     {
-        file_put_contents(__DIR__ . '/../sortedInput.json', json_encode($data, JSON_PRETTY_PRINT));
+        file_put_contents($this->outputFilePath, json_encode($data, JSON_PRETTY_PRINT));
     }
 
     private function calculateSimilarityScore(array $leftList, array $rightList): int
